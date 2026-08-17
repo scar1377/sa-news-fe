@@ -1,17 +1,9 @@
 import ArticleCard from "@/components/ArticleCard";
 import { Article } from "@/types/api";
+import { getArticles } from "@/utils/api";
 
 const Articles = async () => {
-  const res = await fetch("https://sa-news-be.onrender.com/api/articles");
-
-  if (!res.ok) {
-    const err = await res.json();
-    throw err.msg
-      ? new Error(err.msg)
-      : new Error("Oops! Something has gone wrong...");
-  }
-  const data: { articles: Article[] } = await res.json();
-  const { articles } = data;
+  const articles = await getArticles();
   return (
     <>
       <h2>Articles</h2>
