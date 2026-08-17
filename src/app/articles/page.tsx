@@ -1,3 +1,4 @@
+import ArticleCard from "@/components/ArticleCard";
 import { Article } from "@/types/api";
 
 const Articles = async () => {
@@ -16,11 +17,7 @@ const Articles = async () => {
       <h2>Articles</h2>
       <ul>
         {articles.map((article: Article) => {
-          return (
-            <li key={article.article_id}>
-              <h3>Article card</h3>
-            </li>
-          );
+          return <ArticleCard key={article.article_id} article={article} />;
         })}
       </ul>
     </>
