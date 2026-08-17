@@ -7,3 +7,9 @@ export type Article = {
   votes: number;
   comment_count: number;
 };
+
+export type Topic = {
+  slug: string;
+  description: string;
+  img_url?: string;
+};
