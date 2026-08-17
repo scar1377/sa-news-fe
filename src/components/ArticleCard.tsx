@@ -4,7 +4,7 @@ type ArticleCardProps = { article: Article };
 const ArticleCard = ({ article }: ArticleCardProps) => {
   return (
     <li>
-      <h2>{article.title}</h2>
+      <h3>{article.title}</h3>
       <p>topic :{article.topic}</p>
       <p>author: {article.author}</p>
       <p>created at:{article.created_at}</p>
