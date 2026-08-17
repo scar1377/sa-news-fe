@@ -1,5 +1,5 @@
-const TopicsPage = () => {
+const Topics = () => {
   return <h2>Topics</h2>;
 };
 
-export default TopicsPage;
+export default Topics;
