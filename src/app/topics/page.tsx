@@ -8,7 +8,6 @@ const Topics = async () => {
       <h2>Topics</h2>
       <ul>
         {topics.map((topic) => {
-          console.log(topic, "<<<<<<<");
           return (
             <li key={topic.slug}>
               <h3>{topic.slug}</h3>

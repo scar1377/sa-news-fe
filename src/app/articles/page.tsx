@@ -15,7 +15,7 @@ const Articles = async () => {
               key={article.article_id}
               href={`/articles/${article.article_id}`}
             >
-              <ArticleCard article={article} />;
+              <ArticleCard article={article} />
             </Link>
           );
         })}
