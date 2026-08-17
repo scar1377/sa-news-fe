@@ -1,7 +1,7 @@
 import { Article } from "@/types/api";
 
-const ArticleCard = (prop: { key?: number; article: Article }) => {
-  const { article, key } = prop;
+type ArticleCardProps = { article: Article };
+const ArticleCard = ({ article }: ArticleCardProps) => {
   return (
     <li>
       <h2>{article.title}</h2>
