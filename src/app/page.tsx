@@ -1,3 +1,3 @@
 export default function Home() {
-  return <h1>SA News</h1>;
+  return <h2>SA News Home Page</h2>;
 }
