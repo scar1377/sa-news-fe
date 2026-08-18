@@ -13,7 +13,9 @@ const CommentSection = ({ article_id }: CommentSectionProps) => {
   const [error, setError] = useState("");
 
   const handleClickShow = async () => {
-    setShowComments((preShowStatus) => !preShowStatus);
+    setShowComments(true);
+    setIsLoading(true);
+    setError("");
     const result = await getCommentsByArticleId(article_id);
     if (!result.ok) {
       setError("Sorry, we couldn't load the comments.");
@@ -24,7 +26,7 @@ const CommentSection = ({ article_id }: CommentSectionProps) => {
     setIsLoading(false);
   };
   const handleClickHide = () => {
-    setShowComments((preShowStatus) => !preShowStatus);
+    setShowComments(false);
   };
   return (
     <>
