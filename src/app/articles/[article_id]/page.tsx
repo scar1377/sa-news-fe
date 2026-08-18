@@ -1,11 +1,23 @@
 import { getArticleById } from "@/utils/api";
+import { notFound } from "next/navigation";
 
 const SingleArticle = async ({
   params,
 }: PageProps<"/articles/[article_id]">) => {
   const { article_id } = await params;
 
-  const article = await getArticleById(article_id);
+  const result = await getArticleById(article_id);
+
+  if (!result.ok && result.status === 404) {
+    notFound();
+  }
+
+  if (!result.ok) {
+    throw new Error(result.msg);
+  }
+
+  const { article } = result;
+
   return (
     <>
       <h2>{article.title}</h2>

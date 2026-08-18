@@ -1,4 +1,5 @@
 import type { Article, SingleArticle, Topic } from "@/types/api";
+import { notFound } from "next/navigation";
 
 const API_URL = "https://sa-news-be.onrender.com/api";
 
@@ -22,15 +23,24 @@ export const getTopics = async (): Promise<Topic[]> => {
   return data.topics;
 };
 
+type GetArticleResult =
+  | { ok: true; article: SingleArticle }
+  | { ok: false; status: number; msg: string };
+
 export const getArticleById = async (
   article_id: string,
-): Promise<SingleArticle> => {
+): Promise<GetArticleResult> => {
   const res = await fetch(`${API_URL}/articles/${article_id}`);
+
   if (!res.ok) {
     const err = await res.json();
-    throw new Error(err.msg);
+    return {
+      ok: false,
+      status: res.status,
+      msg: err.msg,
+    };
   }
   const data: { article: SingleArticle } = await res.json();
 
-  return data.article;
+  return { ok: true, article: data.article };
 };
