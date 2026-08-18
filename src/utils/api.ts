@@ -1,5 +1,4 @@
-import type { Article, SingleArticle, Topic } from "@/types/api";
-import { notFound } from "next/navigation";
+import type { Article, Comment, SingleArticle, Topic } from "@/types/api";
 
 const API_URL = "https://sa-news-be.onrender.com/api";
 
@@ -43,4 +42,25 @@ export const getArticleById = async (
   const data: { article: SingleArticle } = await res.json();
 
   return { ok: true, article: data.article };
+};
+
+type GetCommentsByArticleIdResult =
+  | { ok: true; comments: Comment[] }
+  | { ok: false; status: number; msg: string };
+
+export const getCommentsByArticleId = async (
+  article_id: string,
+): Promise<GetCommentsByArticleIdResult> => {
+  const res = await fetch(`${API_URL}/articles/${article_id}/comments`);
+  if (!res.ok) {
+    const err = await res.json();
+    return {
+      ok: false,
+      status: res.status,
+      msg: err.msg,
+    };
+  }
+  const data: { comments: Comment[] } = await res.json();
+
+  return { ok: true, comments: data.comments };
 };

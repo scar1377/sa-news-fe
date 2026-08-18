@@ -24,3 +24,12 @@ export type SingleArticle = {
   votes: number;
   comment_count: number;
 };
+
+export type Comment = {
+  comment_id: number;
+  body: string;
+  author: string;
+  votes: number;
+  created_at: string;
+  article_id: number;
+};
