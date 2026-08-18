@@ -1,3 +1,4 @@
+import CommentSection from "@/components/CommentSection";
 import { getArticleById } from "@/utils/api";
 import { notFound } from "next/navigation";
 
@@ -28,6 +29,7 @@ const SingleArticle = async ({
       <p>created at {article.created_at}</p>
       <p>votes: {article.votes}</p>
       <p>comments: {article.comment_count}</p>
+      <CommentSection article_id={article_id} />
     </>
   );
 };
