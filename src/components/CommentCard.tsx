@@ -1,4 +1,4 @@
-import { Comment } from "@/types/api";
+import type { Comment } from "@/types/api";
 
 type CommentCardProps = { comment: Comment };
 const CommentCard = ({ comment }: CommentCardProps) => {
