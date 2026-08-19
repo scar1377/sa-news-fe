@@ -64,3 +64,26 @@ export const getCommentsByArticleId = async (
 
   return { ok: true, comments: data.comments };
 };
+
+type NewComment = {
+  username: string;
+  body: string;
+};
+
+export const postCommentByArticleId = async (
+  article_id: string,
+  newComment: NewComment,
+): Promise<Comment> => {
+  const res = await fetch(`${API_URL}/articles/${article_id}/comments`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newComment),
+  });
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.msg);
+  }
+  const data: { comment: Comment } = await res.json();
+  return data.comment;
+};

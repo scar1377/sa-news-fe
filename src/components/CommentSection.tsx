@@ -4,6 +4,7 @@ import type { Comment } from "@/types/api";
 import { getCommentsByArticleId } from "@/utils/api";
 import { useState } from "react";
 import CommentCard from "./CommentCard";
+import CommentAdder from "./CommentAdder";
 
 type CommentSectionProps = { article_id: string };
 const CommentSection = ({ article_id }: CommentSectionProps) => {
@@ -30,6 +31,7 @@ const CommentSection = ({ article_id }: CommentSectionProps) => {
   };
   return (
     <>
+      <CommentAdder article_id={article_id} setComments={setComments} />
       {isLoading && <p>Loading comments...</p>}
       {error && <p>{error}</p>}
       {showComments ? (
