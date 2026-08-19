@@ -51,11 +51,10 @@ const CommentAdder = ({ article_id, setComments }: CommentAdderProps) => {
           onChange={handleChange}
           value={newCommentInput}
         ></textarea>
-        <button type="submit" disabled={isPosting ? true : false}>
-          Send
+        <button type="submit" disabled={isPosting || !newCommentInput.trim()}>
+          {isPosting ? "Posting..." : "Send"}
         </button>
       </form>
-      {isPosting && <p>Posting...</p>}
       {error && <p>{error}</p>}
     </>
   );
