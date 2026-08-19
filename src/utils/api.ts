@@ -70,20 +70,26 @@ type NewComment = {
   body: string;
 };
 
+type PostCommentByArticleIdResult =
+  | { ok: true; comment: Comment }
+  | { ok: false; status: number; msg: string };
 export const postCommentByArticleId = async (
   article_id: string,
   newComment: NewComment,
-): Promise<Comment> => {
+): Promise<PostCommentByArticleIdResult> => {
   const res = await fetch(`${API_URL}/articles/${article_id}/comments`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newComment),
   });
-
   if (!res.ok) {
     const err = await res.json();
-    throw new Error(err.msg);
+    return {
+      ok: false,
+      status: res.status,
+      msg: err.msg,
+    };
   }
   const data: { comment: Comment } = await res.json();
-  return data.comment;
+  return { ok: true, comment: data.comment };
 };

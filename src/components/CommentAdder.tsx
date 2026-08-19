@@ -1,30 +1,52 @@
 "use client";
-import { Comment } from "@/types/api";
+import type { Comment } from "@/types/api";
 import { postCommentByArticleId } from "@/utils/api";
-import type { Dispatch, SubmitEvent, SetStateAction } from "react";
+import {
+  type Dispatch,
+  type SubmitEvent,
+  type SetStateAction,
+  type ChangeEvent,
+  useState,
+} from "react";
 type CommentAdderProps = {
   article_id: string;
   setComments: Dispatch<SetStateAction<Comment[]>>;
 };
 
 const CommentAdder = ({ article_id, setComments }: CommentAdderProps) => {
+  const [newCommentInput, setNewCommentInput] = useState("");
+  const [error, setError] = useState("");
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setNewCommentInput(e.target.value);
+  };
+
   const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
+    setError("");
     const res = await postCommentByArticleId(article_id, {
       username: "grumpy19",
-      body: "Hard coded test comment",
+      body: newCommentInput,
     });
-    console.log(res, "<<<<<<<<<<<");
-    setComments((currComments) => [res, ...currComments]);
+
+    if (!res.ok) {
+      setError("Oops, something has gone wrong... Please try again.");
+    } else {
+      setComments((currComments) => [res.comment, ...currComments]);
+      setNewCommentInput("");
+    }
   };
   return (
     <>
       <h2>Comment posting form</h2>
+      {error ? <p>{error}</p> : null}
       <form onSubmit={handleSubmit}>
         <label htmlFor="new-comment">Add Comment:</label>
         <textarea
           placeholder="Add your comment here..."
           id="new-comment"
+          onChange={handleChange}
+          value={newCommentInput}
         ></textarea>
         <button type="submit">Send</button>
       </form>
