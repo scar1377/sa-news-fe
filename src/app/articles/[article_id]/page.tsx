@@ -1,4 +1,5 @@
 import CommentSection from "@/components/CommentSection";
+import Votes from "@/components/Votes";
 import { getArticleById } from "@/utils/api";
 import { notFound } from "next/navigation";
 
@@ -27,7 +28,7 @@ const SingleArticle = async ({
       <img src={article.article_img_url} />
       <p>{article.body}</p>
       <p>created at {article.created_at}</p>
-      <p>votes: {article.votes}</p>
+      <Votes article_id={article_id} initialVotes={article.votes} />
 
       <CommentSection
         article_id={article_id}
