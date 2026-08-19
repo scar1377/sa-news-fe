@@ -8,46 +8,52 @@ const Votes = ({ article_id, initialVotes }: VotesProps) => {
   const [newVote, setNewVote] = useState(0);
   const [hasUpVoted, setHasUpVoted] = useState(false);
   const [hasDownVoted, setHasDownVoted] = useState(false);
-  const [hasVotedOnce, setHasVotedOnce] = useState(false);
+  const [isVoting, setIsVoting] = useState(false);
+
   const handleUpVote = async () => {
-    hasDownVoted
-      ? setNewVote((pre) => (pre += 2))
-      : setNewVote((pre) => (pre += 1));
+    const wasDownVoted = hasDownVoted;
+
+    setIsVoting(true);
+
+    const voteChange = hasDownVoted ? 2 : 1;
+    setNewVote((pre) => pre + voteChange);
+
     setHasUpVoted(true);
     setHasDownVoted(false);
-    setHasVotedOnce((pre) => !pre);
-    let votes: number;
-    votes = hasDownVoted ? 2 : 1;
-    const res = await patchArticleById(article_id, { inc_votes: votes });
+
+    const res = await patchArticleById(article_id, { inc_votes: voteChange });
+    setIsVoting(false);
     if (!res.ok) {
-      setNewVote((pre) => (pre -= 1));
+      setNewVote((pre) => pre - voteChange);
       setHasUpVoted(false);
+      setHasDownVoted(wasDownVoted);
     }
   };
   const handleDownVote = async () => {
-    hasUpVoted
-      ? setNewVote((pre) => (pre -= 2))
-      : setNewVote((pre) => (pre -= 1));
+    const wasUpVoted = hasUpVoted;
 
+    setIsVoting(true);
+    const voteChange = hasUpVoted ? -2 : -1;
+    setNewVote((pre) => pre + voteChange);
     setHasDownVoted(true);
     setHasUpVoted(false);
 
-    let votes: number;
-    votes = hasUpVoted ? -2 : -1;
-    const res = await patchArticleById(article_id, { inc_votes: votes });
-    if (!res.ok) {
-      setNewVote((pre) => (pre += votes));
+    const res = await patchArticleById(article_id, { inc_votes: voteChange });
+    setIsVoting(false);
 
+    if (!res.ok) {
+      setNewVote((pre) => pre - voteChange);
       setHasDownVoted(false);
+      setHasUpVoted(wasUpVoted);
     }
   };
   return (
     <>
-      <button onClick={handleUpVote} disabled={hasUpVoted}>
+      <button onClick={handleUpVote} disabled={hasUpVoted || isVoting}>
         +
       </button>
       <span> {initialVotes + newVote} </span>
-      <button onClick={handleDownVote} disabled={hasDownVoted}>
+      <button onClick={handleDownVote} disabled={hasDownVoted || isVoting}>
         -
       </button>
     </>

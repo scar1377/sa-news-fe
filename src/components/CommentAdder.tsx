@@ -42,7 +42,7 @@ const CommentAdder = ({
     } else {
       setIsPosting(false);
       setComments((currComments) => [res.comment, ...currComments]);
-      setCommentCount((pre) => (pre += 1));
+      setCommentCount((pre) => pre + 1);
       setNewCommentInput("");
     }
   };
