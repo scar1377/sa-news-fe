@@ -16,6 +16,7 @@ type CommentAdderProps = {
 const CommentAdder = ({ article_id, setComments }: CommentAdderProps) => {
   const [newCommentInput, setNewCommentInput] = useState("");
   const [error, setError] = useState("");
+  const [isPosting, setIsPosting] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setNewCommentInput(e.target.value);
@@ -23,6 +24,7 @@ const CommentAdder = ({ article_id, setComments }: CommentAdderProps) => {
 
   const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
+    setIsPosting(true);
     setError("");
     const res = await postCommentByArticleId(article_id, {
       username: "grumpy19",
@@ -30,8 +32,10 @@ const CommentAdder = ({ article_id, setComments }: CommentAdderProps) => {
     });
 
     if (!res.ok) {
+      setIsPosting(false);
       setError("Oops, something has gone wrong... Please try again.");
     } else {
+      setIsPosting(false);
       setComments((currComments) => [res.comment, ...currComments]);
       setNewCommentInput("");
     }
@@ -39,7 +43,6 @@ const CommentAdder = ({ article_id, setComments }: CommentAdderProps) => {
   return (
     <>
       <h2>Comment posting form</h2>
-      {error ? <p>{error}</p> : null}
       <form onSubmit={handleSubmit}>
         <label htmlFor="new-comment">Add Comment:</label>
         <textarea
@@ -48,8 +51,12 @@ const CommentAdder = ({ article_id, setComments }: CommentAdderProps) => {
           onChange={handleChange}
           value={newCommentInput}
         ></textarea>
-        <button type="submit">Send</button>
+        <button type="submit" disabled={isPosting ? true : false}>
+          Send
+        </button>
       </form>
+      {isPosting && <p>Posting...</p>}
+      {error && <p>{error}</p>}
     </>
   );
 };
