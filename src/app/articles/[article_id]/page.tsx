@@ -28,8 +28,11 @@ const SingleArticle = async ({
       <p>{article.body}</p>
       <p>created at {article.created_at}</p>
       <p>votes: {article.votes}</p>
-      <p>comments: {article.comment_count}</p>
-      <CommentSection article_id={article_id} />
+
+      <CommentSection
+        article_id={article_id}
+        initialCommentCount={article.comment_count}
+      />
     </>
   );
 };

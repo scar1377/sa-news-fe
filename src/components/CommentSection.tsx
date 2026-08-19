@@ -6,10 +6,14 @@ import { useState } from "react";
 import CommentCard from "./CommentCard";
 import CommentAdder from "./CommentAdder";
 
-type CommentSectionProps = { article_id: string };
-const CommentSection = ({ article_id }: CommentSectionProps) => {
+type CommentSectionProps = { article_id: string; initialCommentCount: number };
+const CommentSection = ({
+  article_id,
+  initialCommentCount,
+}: CommentSectionProps) => {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
+  const [commentCount, setCommentCount] = useState(initialCommentCount);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -31,7 +35,12 @@ const CommentSection = ({ article_id }: CommentSectionProps) => {
   };
   return (
     <>
-      <CommentAdder article_id={article_id} setComments={setComments} />
+      <p>Comments({commentCount})</p>
+      <CommentAdder
+        article_id={article_id}
+        setComments={setComments}
+        setCommentCount={setCommentCount}
+      />
       {isLoading && <p>Loading comments...</p>}
       {error && <p>{error}</p>}
       {showComments ? (

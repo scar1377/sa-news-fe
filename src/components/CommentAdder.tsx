@@ -11,9 +11,14 @@ import {
 type CommentAdderProps = {
   article_id: string;
   setComments: Dispatch<SetStateAction<Comment[]>>;
+  setCommentCount: Dispatch<SetStateAction<number>>;
 };
 
-const CommentAdder = ({ article_id, setComments }: CommentAdderProps) => {
+const CommentAdder = ({
+  article_id,
+  setComments,
+  setCommentCount,
+}: CommentAdderProps) => {
   const [newCommentInput, setNewCommentInput] = useState("");
   const [error, setError] = useState("");
   const [isPosting, setIsPosting] = useState(false);
@@ -37,6 +42,7 @@ const CommentAdder = ({ article_id, setComments }: CommentAdderProps) => {
     } else {
       setIsPosting(false);
       setComments((currComments) => [res.comment, ...currComments]);
+      setCommentCount((pre) => (pre += 1));
       setNewCommentInput("");
     }
   };

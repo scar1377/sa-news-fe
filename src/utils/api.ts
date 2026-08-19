@@ -70,13 +70,13 @@ type NewComment = {
   body: string;
 };
 
-type PostCommentByArticleIdResult =
+type PostCommentByArticleByIdResult =
   | { ok: true; comment: Comment }
   | { ok: false; status: number; msg: string };
 export const postCommentByArticleId = async (
   article_id: string,
   newComment: NewComment,
-): Promise<PostCommentByArticleIdResult> => {
+): Promise<PostCommentByArticleByIdResult> => {
   const res = await fetch(`${API_URL}/articles/${article_id}/comments`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -92,4 +92,32 @@ export const postCommentByArticleId = async (
   }
   const data: { comment: Comment } = await res.json();
   return { ok: true, comment: data.comment };
+};
+
+type NewVotes = {
+  inc_votes: number;
+};
+type PatchArticleByIdResult =
+  | { ok: true; article: SingleArticle }
+  | { ok: false; status: number; msg: string };
+
+export const patchArticleById = async (
+  article_id: string,
+  newVotes: NewVotes,
+): Promise<PatchArticleByIdResult> => {
+  const res = await fetch(`${API_URL}/articles/${article_id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newVotes),
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    return {
+      ok: false,
+      status: res.status,
+      msg: err.msg,
+    };
+  }
+  const data: { article: SingleArticle } = await res.json();
+  return { ok: true, article: data.article };
 };
