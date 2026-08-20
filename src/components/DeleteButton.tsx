@@ -18,13 +18,12 @@ const DeleteButton = ({ comment_id, onDeleteSuccess }: DeleteButtonProps) => {
     setIsDeleting(false);
     if (!res.ok) {
       setError("Oops, something went wrong. Try again later");
-    } else {
-      onDeleteSuccess(comment_id);
     }
+    onDeleteSuccess(comment_id);
   };
   return (
     <>
-      <button onClick={handleClick}>
+      <button onClick={handleClick} disabled={isDeleting}>
         {isDeleting ? "Deleting..." : "Delete"}
       </button>
       {error && <p>{error}</p>}

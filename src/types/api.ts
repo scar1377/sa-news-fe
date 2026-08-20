@@ -33,3 +33,9 @@ export type Comment = {
   created_at: string;
   article_id: number;
 };
+
+export type User = {
+  username: string;
+  name: string;
+  avatar_url: string;
+};
