@@ -10,15 +10,10 @@ import {
 } from "react";
 type CommentAdderProps = {
   article_id: string;
-  setComments: Dispatch<SetStateAction<Comment[]>>;
-  setCommentCount: Dispatch<SetStateAction<number>>;
+  onPostSuccess: (comment: Comment) => void;
 };
 
-const CommentAdder = ({
-  article_id,
-  setComments,
-  setCommentCount,
-}: CommentAdderProps) => {
+const CommentAdder = ({ article_id, onPostSuccess }: CommentAdderProps) => {
   const [newCommentInput, setNewCommentInput] = useState("");
   const [error, setError] = useState("");
   const [isPosting, setIsPosting] = useState(false);
@@ -41,8 +36,7 @@ const CommentAdder = ({
       setError("Oops, something has gone wrong... Please try again.");
     } else {
       setIsPosting(false);
-      setComments((currComments) => [res.comment, ...currComments]);
-      setCommentCount((pre) => pre + 1);
+      onPostSuccess(res.comment);
       setNewCommentInput("");
     }
   };

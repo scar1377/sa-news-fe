@@ -33,6 +33,10 @@ const CommentSection = ({
   const handleClickHide = () => {
     setShowComments(false);
   };
+  const onPostSuccess = (comment: Comment) => {
+    setComments((current) => [comment, ...current]);
+    setCommentCount((current) => current + 1);
+  };
 
   const onDeleteSuccess = (id: number) => {
     setCommentCount((pre) => pre - 1);
@@ -43,11 +47,7 @@ const CommentSection = ({
   return (
     <>
       <p>Comments({commentCount})</p>
-      <CommentAdder
-        article_id={article_id}
-        setComments={setComments}
-        setCommentCount={setCommentCount}
-      />
+      <CommentAdder article_id={article_id} onPostSuccess={onPostSuccess} />
       {isLoading && <p>Loading comments...</p>}
       {error && <p>{error}</p>}
       {showComments ? (
