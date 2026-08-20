@@ -121,3 +121,23 @@ export const patchArticleById = async (
   const data: { article: SingleArticle } = await res.json();
   return { ok: true, article: data.article };
 };
+
+type DeleteCommentByIdResult =
+  | { ok: true }
+  | { ok: false; status: number; msg: string };
+export const deleteCommentById = async (
+  comment_id: number,
+): Promise<DeleteCommentByIdResult> => {
+  const res = await fetch(`${API_URL}/comments/${comment_id}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    return {
+      ok: false,
+      status: res.status,
+      msg: err.msg,
+    };
+  }
+  return { ok: true };
+};
