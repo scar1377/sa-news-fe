@@ -2,7 +2,7 @@
 
 import type { User } from "@/types/api";
 import { useState, type ReactNode } from "react";
-import UserContext from "./userContext";
+import UserContext from "./UserContext";
 
 type UserProviderProps = {
   children: ReactNode;

@@ -1,3 +1,4 @@
+"use client";
 import type { Comment } from "@/types/api";
 import DeleteButton from "./DeleteButton";
 import useUser from "@/contexts/useUser";
