@@ -33,6 +33,13 @@ const CommentSection = ({
   const handleClickHide = () => {
     setShowComments(false);
   };
+
+  const onDeleteSuccess = (id: number) => {
+    setCommentCount((pre) => pre - 1);
+    setComments((currComments) => {
+      return currComments.filter((comment) => comment.comment_id !== id);
+    });
+  };
   return (
     <>
       <p>Comments({commentCount})</p>
@@ -54,7 +61,11 @@ const CommentSection = ({
           )}
           <ul>
             {comments.map((comment) => (
-              <CommentCard key={comment.comment_id} comment={comment} />
+              <CommentCard
+                key={comment.comment_id}
+                comment={comment}
+                onDeleteSuccess={onDeleteSuccess}
+              />
             ))}
           </ul>
         </>
