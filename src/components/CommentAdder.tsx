@@ -1,13 +1,7 @@
 "use client";
 import type { Comment } from "@/types/api";
 import { postCommentByArticleId } from "@/utils/api";
-import {
-  type Dispatch,
-  type SubmitEvent,
-  type SetStateAction,
-  type ChangeEvent,
-  useState,
-} from "react";
+import { type SubmitEvent, type ChangeEvent, useState } from "react";
 type CommentAdderProps = {
   article_id: string;
   onPostSuccess: (comment: Comment) => void;
