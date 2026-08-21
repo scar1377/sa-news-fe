@@ -15,7 +15,6 @@ const Login = () => {
 
   const handleClick = async () => {
     if (user) {
-      setIsLoading(false);
       setShowUserPicker(false);
       setUser(null);
     } else {
@@ -47,8 +46,8 @@ const Login = () => {
     <>
       {user ? (
         <>
-          <img src={user?.avatar_url} style={{ width: 25, height: 25 }} />
-          <span>{user?.username}</span>
+          <img src={user.avatar_url} style={{ width: 25, height: 25 }} />
+          <span>{user.username}</span>
           <button onClick={handleClick}>Log out</button>
         </>
       ) : (
