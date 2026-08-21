@@ -7,7 +7,7 @@ import { type ChangeEvent, useState } from "react";
 
 const Login = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showUserPicker, setShowUserPicker] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -16,7 +16,7 @@ const Login = () => {
   const handleClick = async () => {
     if (user) {
       setIsLoading(false);
-      setIsLoggedIn(false);
+      setShowUserPicker(false);
       setUser(null);
     } else {
       setIsLoading(true);
@@ -27,7 +27,7 @@ const Login = () => {
         setIsLoading(false);
         return;
       }
-      setIsLoggedIn(true);
+      setShowUserPicker(true);
       setError("");
 
       setIsLoading(false);
@@ -39,29 +39,13 @@ const Login = () => {
     const currentUser = users.find((user) => user.username === e.target.value);
     if (currentUser) {
       setUser(currentUser);
-      setIsLoggedIn(false);
+      setShowUserPicker(false);
     }
   };
 
   return (
     <>
-      {isLoggedIn ? (
-        <>
-          <span>Login as:</span>
-          <select onChange={handleChange} defaultValue="placeholder">
-            <option disabled value="placeholder">
-              Chose login user
-            </option>
-            {users.map((user) => {
-              return (
-                <option key={user.username} value={user.username}>
-                  {user.username}
-                </option>
-              );
-            })}
-          </select>
-        </>
-      ) : user ? (
+      {user ? (
         <>
           <img src={user?.avatar_url} style={{ width: 25, height: 25 }} />
           <span>{user?.username}</span>
@@ -69,10 +53,30 @@ const Login = () => {
         </>
       ) : (
         <>
-          <button onClick={handleClick}>
-            {isLoading ? "loading..." : "Login"}
-          </button>
-          {error && <p>{error}</p>}
+          {showUserPicker ? (
+            <>
+              <span>Login as:</span>
+              <select onChange={handleChange} defaultValue="placeholder">
+                <option disabled value="placeholder">
+                  Chose login user
+                </option>
+                {users.map((user) => {
+                  return (
+                    <option key={user.username} value={user.username}>
+                      {user.username}
+                    </option>
+                  );
+                })}
+              </select>
+            </>
+          ) : (
+            <>
+              <button onClick={handleClick} disabled={isLoading}>
+                {isLoading ? "loading..." : "Login"}
+              </button>
+              {error && <p>{error}</p>}
+            </>
+          )}
         </>
       )}
     </>
