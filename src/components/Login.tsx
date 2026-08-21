@@ -7,43 +7,55 @@ import { type ChangeEvent, useState } from "react";
 
 const Login = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { user, setUser } = useUser();
 
   const handleClick = async () => {
-    setIsOpen(true);
-    const res = await getUsers();
-    if (!res.ok) {
-      return;
+    if (user) {
+      setIsLoggedIn(false);
+      setUser(null);
+    } else {
+      setIsLoggedIn(true);
+      const res = await getUsers();
+      if (!res.ok) {
+        return;
+      }
+      setUsers(res.users);
     }
-    console.log(res.users, "<<<<<<<<,users");
-    setUsers(res.users);
   };
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const currentUser = users.find((user) => user.username === e.target.value);
-    if (currentUser) setUser(currentUser);
+    if (currentUser) {
+      setUser(currentUser);
+      setIsLoggedIn(false);
+    }
   };
 
   return (
     <>
-      {isOpen ? (
-        <select onChange={handleChange} defaultValue="placeholder">
-          <option disabled value="placeholder">
-            Chose login user
-          </option>
-          {users.map((user) => {
-            return (
-              <option key={user.username} value={user.username}>
-                {user.username}
-              </option>
-            );
-          })}
-        </select>
+      {isLoggedIn ? (
+        <>
+          <span>Login as:</span>
+          <select onChange={handleChange} defaultValue="placeholder">
+            <option disabled value="placeholder">
+              Chose login user
+            </option>
+            {users.map((user) => {
+              return (
+                <option key={user.username} value={user.username}>
+                  {user.username}
+                </option>
+              );
+            })}
+          </select>
+        </>
       ) : (
-        <button onClick={handleClick}>
-          {user?.username ? "Log out" : "Log in"}
-        </button>
+        <>
+          <img src={user?.avatar_url} style={{ width: 25, height: 25 }} />
+          <span>{user?.username}</span>
+          <button onClick={handleClick}>Log out</button>
+        </>
       )}
     </>
   );
