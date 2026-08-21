@@ -14,10 +14,8 @@ const Votes = ({ article_id, initialVotes }: VotesProps) => {
   const { user } = useUser();
 
   const handleUpVote = async () => {
-    if (!user) {
-      alert("Please login to vote");
-      return;
-    }
+    if (!user) return;
+
     const wasDownVoted = hasDownVoted;
 
     setIsVoting(true);
@@ -37,10 +35,8 @@ const Votes = ({ article_id, initialVotes }: VotesProps) => {
     }
   };
   const handleDownVote = async () => {
-    if (!user) {
-      alert("Please login to vote");
-      return;
-    }
+    if (!user) return;
+
     const wasUpVoted = hasUpVoted;
 
     setIsVoting(true);
@@ -60,11 +56,15 @@ const Votes = ({ article_id, initialVotes }: VotesProps) => {
   };
   return (
     <>
-      <button onClick={handleUpVote} disabled={hasUpVoted || isVoting}>
+      {!user && <p>Please login to vote</p>}
+      <button onClick={handleUpVote} disabled={hasUpVoted || isVoting || !user}>
         +
       </button>
       <span> {initialVotes + newVote} </span>
-      <button onClick={handleDownVote} disabled={hasDownVoted || isVoting}>
+      <button
+        onClick={handleDownVote}
+        disabled={hasDownVoted || isVoting || !user}
+      >
         -
       </button>
     </>
