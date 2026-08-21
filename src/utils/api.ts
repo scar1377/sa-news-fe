@@ -1,4 +1,4 @@
-import type { Article, Comment, SingleArticle, Topic } from "@/types/api";
+import type { Article, Comment, SingleArticle, Topic, User } from "@/types/api";
 
 const API_URL = "https://sa-news-be.onrender.com/api";
 
@@ -140,4 +140,21 @@ export const deleteCommentById = async (
     };
   }
   return { ok: true };
+};
+
+type GetUsersResult =
+  | { ok: true; users: User[] }
+  | { ok: false; status: number; msg: string };
+export const getUsers = async (): Promise<GetUsersResult> => {
+  const res = await fetch(`${API_URL}/users`);
+  if (!res.ok) {
+    const err = await res.json();
+    return {
+      ok: false,
+      status: res.status,
+      msg: err.msg,
+    };
+  }
+  const data: { users: User[] } = await res.json();
+  return { ok: true, users: data.users };
 };
