@@ -1,5 +1,6 @@
 "use client";
 
+import useUser from "@/contexts/useUser";
 import { patchArticleById } from "@/utils/api";
 import { useState } from "react";
 
@@ -10,7 +11,13 @@ const Votes = ({ article_id, initialVotes }: VotesProps) => {
   const [hasDownVoted, setHasDownVoted] = useState(false);
   const [isVoting, setIsVoting] = useState(false);
 
+  const { user } = useUser();
+
   const handleUpVote = async () => {
+    if (!user) {
+      alert("Please login to vote");
+      return;
+    }
     const wasDownVoted = hasDownVoted;
 
     setIsVoting(true);
@@ -30,6 +37,10 @@ const Votes = ({ article_id, initialVotes }: VotesProps) => {
     }
   };
   const handleDownVote = async () => {
+    if (!user) {
+      alert("Please login to vote");
+      return;
+    }
     const wasUpVoted = hasUpVoted;
 
     setIsVoting(true);

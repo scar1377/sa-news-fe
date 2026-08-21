@@ -21,22 +21,22 @@ const CommentAdder = ({ article_id, onPostSuccess }: CommentAdderProps) => {
 
   const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
+
+    if (!user) return;
     setIsPosting(true);
     setError("");
-    if (user) {
-      const res = await postCommentByArticleId(article_id, {
-        username: user.username,
-        body: newCommentInput,
-      });
+    const res = await postCommentByArticleId(article_id, {
+      username: user.username,
+      body: newCommentInput,
+    });
 
-      if (!res.ok) {
-        setIsPosting(false);
-        setError("Oops, something has gone wrong... Please try again.");
-      } else {
-        setIsPosting(false);
-        onPostSuccess(res.comment);
-        setNewCommentInput("");
-      }
+    if (!res.ok) {
+      setIsPosting(false);
+      setError("Oops, something has gone wrong... Please try again.");
+    } else {
+      setIsPosting(false);
+      onPostSuccess(res.comment);
+      setNewCommentInput("");
     }
   };
   return (
