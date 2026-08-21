@@ -21,13 +21,13 @@ const CommentSection = ({
     setShowComments(true);
     setIsLoading(true);
     setError("");
-    const result = await getCommentsByArticleId(article_id);
-    if (!result.ok) {
+    const res = await getCommentsByArticleId(article_id);
+    if (!res.ok) {
       setError("Sorry, we couldn't load the comments.");
       setIsLoading(false);
       return;
     }
-    setComments(result.comments);
+    setComments(res.comments);
     setIsLoading(false);
   };
   const handleClickHide = () => {
