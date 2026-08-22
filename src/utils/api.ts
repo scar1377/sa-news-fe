@@ -2,8 +2,24 @@ import type { Article, Comment, SingleArticle, Topic, User } from "@/types/api";
 
 const API_URL = "https://sa-news-be.onrender.com/api";
 
-export const getArticles = async (): Promise<Article[]> => {
-  const res = await fetch(`${API_URL}/articles`);
+export const getArticles = async (
+  sort_by?: string,
+  order?: "asc" | "desc",
+  topic?: string,
+): Promise<Article[]> => {
+  const params = new URLSearchParams();
+
+  if (sort_by) params.set("sort_by", sort_by);
+  if (order) params.set("order", order);
+  if (topic) params.set("topic", topic);
+
+  const queryString = params.toString();
+
+  const url = queryString
+    ? `${API_URL}/articles?${queryString}`
+    : `${API_URL}/articles`;
+
+  const res = await fetch(url);
   if (!res.ok) {
     const err = await res.json();
     throw new Error(err.msg);
