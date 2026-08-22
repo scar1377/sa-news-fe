@@ -1,5 +1,5 @@
 import ArticleCard from "@/components/ArticleCard";
-import type { Article } from "@/types/api";
+import Search from "@/components/Search";
 import { getArticles } from "@/utils/api";
 import Link from "next/link";
 
@@ -16,6 +16,7 @@ const Articles = async ({ searchParams }: ArticlesProps) => {
   return (
     <>
       <h2>Articles</h2>
+      <Search />
       <ul>
         {articles.map((article) => {
           return (
