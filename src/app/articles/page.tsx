@@ -9,8 +9,8 @@ type ArticlesProps = {
   }>;
 };
 const Articles = async ({ searchParams }: ArticlesProps) => {
-  const { sort_by, order, topic } = await searchParams;
-  const res = await getArticles(sort_by, order, topic);
+  const { sort_by, order } = await searchParams;
+  const res = await getArticles({ sort_by, order });
   if (!res.ok) {
     throw Error("Oops, something went wrong... Try again later");
   }

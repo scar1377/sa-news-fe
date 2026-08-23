@@ -1,4 +1,4 @@
-import { Article } from "@/types/api";
+import type { Article } from "@/types/api";
 import Search from "./Search";
 import Link from "next/link";
 import ArticleCard from "./ArticleCard";
@@ -6,7 +6,7 @@ import ArticleCard from "./ArticleCard";
 type ArticleListProps = {
   articles: Article[];
 };
-const ArticleList = async ({ articles }: ArticleListProps) => {
+const ArticleList = ({ articles }: ArticleListProps) => {
   return (
     <>
       <h2>Articles</h2>

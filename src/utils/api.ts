@@ -5,11 +5,17 @@ const API_URL = "https://sa-news-be.onrender.com/api";
 type GetArticlesResult =
   | { ok: true; articles: Article[] }
   | { ok: false; status: number; msg: string };
-export const getArticles = async (
-  sort_by?: string,
-  order?: "asc" | "desc",
-  topic?: string,
-): Promise<GetArticlesResult> => {
+
+type GetArticlesOptions = {
+  sort_by?: string;
+  order?: "asc" | "desc";
+  topic?: string;
+};
+export const getArticles = async ({
+  sort_by,
+  order,
+  topic,
+}: GetArticlesOptions): Promise<GetArticlesResult> => {
   const params = new URLSearchParams();
 
   if (sort_by) params.set("sort_by", sort_by);
