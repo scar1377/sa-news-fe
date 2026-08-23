@@ -4,10 +4,14 @@ import { notFound } from "next/navigation";
 
 const ArticlesByTopic = async ({
   params,
+  searchParams,
 }: PageProps<"/topics/[topic]/articles">) => {
   const { topic } = await params;
+  const { sort_by, order } = await searchParams;
 
-  const result = await getArticles(undefined, undefined, topic);
+  const sortBy = typeof sort_by === "string" ? sort_by : undefined;
+  const orderVal = order === "asc" || order === "desc" ? order : undefined;
+  const result = await getArticles({ sort_by: sortBy, order: orderVal, topic });
 
   if (!result.ok && result.status === 404) {
     notFound();
