@@ -1,8 +1,5 @@
-import Articles from "@/app/articles/page";
-import ArticleCard from "@/components/ArticleCard";
-import Search from "@/components/Search";
+import ArticleList from "@/components/ArticleList";
 import { getArticles } from "@/utils/api";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 const ArticlesByTopic = async ({
@@ -21,24 +18,7 @@ const ArticlesByTopic = async ({
   }
 
   const { articles } = result;
-  return (
-    <>
-      <h2>Articles</h2>
-      <Search />
-      <ul>
-        {articles.map((article) => {
-          return (
-            <Link
-              key={article.article_id}
-              href={`/articles/${article.article_id}`}
-            >
-              <ArticleCard article={article} />
-            </Link>
-          );
-        })}
-      </ul>
-    </>
-  );
+  return <ArticleList articles={articles} />;
 };
 
 export default ArticlesByTopic;

@@ -1,7 +1,5 @@
-import ArticleCard from "@/components/ArticleCard";
-import Search from "@/components/Search";
+import ArticleList from "@/components/ArticleList";
 import { getArticles } from "@/utils/api";
-import Link from "next/link";
 
 type ArticlesProps = {
   searchParams: Promise<{
@@ -18,24 +16,7 @@ const Articles = async ({ searchParams }: ArticlesProps) => {
   }
   const { articles } = res;
 
-  return (
-    <>
-      <h2>Articles</h2>
-      <Search />
-      <ul>
-        {articles.map((article) => {
-          return (
-            <Link
-              key={article.article_id}
-              href={`/articles/${article.article_id}`}
-            >
-              <ArticleCard article={article} />
-            </Link>
-          );
-        })}
-      </ul>
-    </>
-  );
+  return <ArticleList articles={articles} />;
 };
 
 export default Articles;
