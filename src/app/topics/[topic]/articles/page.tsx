@@ -1,23 +1,26 @@
+import Articles from "@/app/articles/page";
 import ArticleCard from "@/components/ArticleCard";
 import Search from "@/components/Search";
 import { getArticles } from "@/utils/api";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
-type ArticlesProps = {
-  searchParams: Promise<{
-    sort_by?: string;
-    order?: "asc" | "desc";
-    topic?: string;
-  }>;
-};
-const Articles = async ({ searchParams }: ArticlesProps) => {
-  const { sort_by, order, topic } = await searchParams;
-  const res = await getArticles(sort_by, order, topic);
-  if (!res.ok) {
-    throw Error("Oops, something went wrong... Try again later");
+const ArticlesByTopic = async ({
+  params,
+}: PageProps<"/topics/[topic]/articles">) => {
+  const { topic } = await params;
+
+  const result = await getArticles(undefined, undefined, topic);
+
+  if (!result.ok && result.status === 404) {
+    notFound();
   }
-  const { articles } = res;
 
+  if (!result.ok) {
+    throw new Error(result.msg);
+  }
+
+  const { articles } = result;
   return (
     <>
       <h2>Articles</h2>
@@ -38,4 +41,4 @@ const Articles = async ({ searchParams }: ArticlesProps) => {
   );
 };
 
-export default Articles;
+export default ArticlesByTopic;

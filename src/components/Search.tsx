@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 
 const Search = () => {
   const router = useRouter();
