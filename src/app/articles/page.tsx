@@ -2,6 +2,7 @@ import ArticleCard from "@/components/ArticleCard";
 import Search from "@/components/Search";
 import { getArticles } from "@/utils/api";
 import Link from "next/link";
+import { useState } from "react";
 
 type ArticlesProps = {
   searchParams: Promise<{
@@ -11,8 +12,15 @@ type ArticlesProps = {
   }>;
 };
 const Articles = async ({ searchParams }: ArticlesProps) => {
+  const [error, setError] = useState("");
   const { sort_by, order, topic } = await searchParams;
-  const articles = await getArticles(sort_by, order, topic);
+  const res = await getArticles(sort_by, order, topic);
+  if (!res.ok) {
+    setError("Oops, something has gone wrong");
+    return;
+  }
+  const { articles } = res;
+  setError("");
   return (
     <>
       <h2>Articles</h2>
