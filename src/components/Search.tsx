@@ -1,15 +1,25 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 
 const Search = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const order = searchParams.get("order") ?? "desc";
 
+  const params = new URLSearchParams(searchParams.toString());
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    router.push(`${pathname}?sort_by=${e.target.value}`);
+    params.set("sort_by", e.target.value);
+    router.push(`${pathname}?${params.toString()}`);
+  };
+  const handleClick = () => {
+    const nextOrder = order === "desc" ? "asc" : "desc";
+
+    params.set("order", nextOrder);
+    router.push(`${pathname}?${params.toString()}`);
   };
   return (
     <>
@@ -19,6 +29,9 @@ const Search = () => {
         <option value="votes">votes</option>
         <option value="comment_count">comments</option>
       </select>
+      <button onClick={handleClick}>
+        {order === "desc" ? "Z->A" : "A->Z"}
+      </button>
     </>
   );
 };
