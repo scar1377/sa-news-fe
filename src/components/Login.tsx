@@ -45,17 +45,30 @@ const Login = () => {
   return (
     <>
       {user ? (
-        <>
-          <img src={user.avatar_url} style={{ width: 25, height: 25 }} />
+        <div className="flex items-center gap-3">
+          <img
+            src={user.avatar_url}
+            className="border-3 border-blue-900 w-8 h-8 rounded-full object-cover"
+            alt={`${user.username}'s avatar`}
+          />
           <span>{user.username}</span>
-          <button onClick={handleClick}>Log out</button>
-        </>
+          <button
+            onClick={handleClick}
+            className="border-2 border-orange-200 bg-white text-orange-400 px-4 py-2 rounded-md hover:border-orange-300 hover:bg-orange-50 cursor-pointer transition duration-200 active:translate-y-0.5 active:translate-x-0.5"
+          >
+            Log out
+          </button>
+        </div>
       ) : (
         <>
           {showUserPicker ? (
-            <>
-              <span>Login as:</span>
-              <select onChange={handleChange} defaultValue="placeholder">
+            <div className="flex items-center gap-2">
+              <span className="mr-2 text-sm font-medium">Login as:</span>
+              <select
+                onChange={handleChange}
+                defaultValue="placeholder"
+                className="rounded-md border border-orange-200 bg-white px-3 py-2 text-sm outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-100"
+              >
                 <option disabled value="placeholder">
                   Chose login user
                 </option>
@@ -67,7 +80,7 @@ const Login = () => {
                   );
                 })}
               </select>
-            </>
+            </div>
           ) : (
             <>
               <button
