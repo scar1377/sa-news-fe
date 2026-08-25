@@ -4,12 +4,15 @@ import Login from "./Login";
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between px-6 py-4 border-b">
-      <Link href="/">
-        <h1 className="text-2xl font-bold">SA News</h1>
-      </Link>
+    <header className="px-6 py-4 border-b">
+      <div className="flex items-center justify-between">
+        <Link href="/">
+          <h1 className="text-3xl font-bold text-orange-600">SA News</h1>
+        </Link>
+        <Login />
+      </div>
+
       <Nav />
-      <Login />
     </header>
   );
 };
