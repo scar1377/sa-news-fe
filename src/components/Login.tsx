@@ -70,7 +70,11 @@ const Login = () => {
             </>
           ) : (
             <>
-              <button onClick={handleClick} disabled={isLoading}>
+              <button
+                onClick={handleClick}
+                disabled={isLoading}
+                className="bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700 cursor-pointer transition duration-200 active:translate-y-0.5 active:translate-x-0.5"
+              >
                 {isLoading ? "loading..." : "Login"}
               </button>
               {error && <p>{error}</p>}
