@@ -5,7 +5,7 @@ import Login from "./Login";
 const Header = () => {
   return (
     <header className="bg-orange-100 px-6 py-4 border-b-2 border-orange-200">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex gap-4 items-center justify-between">
         <Link href="/">
           <h1 className="text-3xl font-bold text-orange-600 whitespace-nowrap">
             SA News
