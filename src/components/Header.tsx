@@ -5,9 +5,11 @@ import Login from "./Login";
 const Header = () => {
   return (
     <header className="bg-orange-100 px-6 py-4 border-b-2 border-orange-200">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <Link href="/">
-          <h1 className="text-3xl font-bold text-orange-600">SA News</h1>
+          <h1 className="text-3xl font-bold text-orange-600 whitespace-nowrap">
+            SA News
+          </h1>
         </Link>
         <Login />
       </div>
