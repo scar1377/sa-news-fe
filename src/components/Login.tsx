@@ -48,7 +48,7 @@ const Login = () => {
         <div className="flex items-center gap-3">
           <img
             src={user.avatar_url}
-            className="border-3 border-blue-900 w-8 h-8 rounded-full object-cover"
+            className="border-3 border-blue-900/60 w-8 h-8 rounded-full object-cover"
             alt={`${user.username}'s avatar`}
           />
           <span>{user.username}</span>
