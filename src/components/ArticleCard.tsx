@@ -8,10 +8,21 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
       <span className="rounded-lg border-2 border-orange-200 bg-orange-50 px-2 py-1 text-sm text-orange-500">
         {article.topic.toUpperCase()}
       </span>
-      <p>author: {article.author}</p>
-      <p>created at:{article.created_at}</p>
-      <p>votes:{article.votes}</p>
-      <p>comments: {article.comment_count}</p>
+      <div className="text-sm text-neutral-500">
+        <span>👤 {article.author}</span>
+        <span> · </span>
+        <span>
+          created at:{" "}
+          {new Date(article.created_at).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          })}
+        </span>
+      </div>
+
+      <span>votes:{article.votes}</span>
+      <span>comments: {article.comment_count}</span>
     </li>
   );
 };
