@@ -3,7 +3,7 @@
 import useUser from "@/contexts/useUser";
 import type { User } from "@/types/api";
 import { getUsers } from "@/utils/api";
-import { type ChangeEvent, useState } from "react";
+import { type ChangeEvent, useEffect, useRef, useState } from "react";
 
 const Login = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -12,7 +12,36 @@ const Login = () => {
   const [error, setError] = useState("");
   const [showAccountMenu, setShowAccountMenu] = useState(false);
 
+  const accountMenuRef = useRef<HTMLDivElement>(null);
+
   const { user, setUser } = useUser();
+
+  useEffect(() => {
+    if (!showAccountMenu) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        accountMenuRef.current &&
+        !accountMenuRef.current.contains(event.target as Node)
+      ) {
+        setShowAccountMenu(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setShowAccountMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showAccountMenu]);
 
   const handleClick = async () => {
     if (user) {
@@ -49,9 +78,13 @@ const Login = () => {
       {user ? (
         <>
           {/* Mobile */}
-          <div className="relative sm:hidden">
+          <div ref={accountMenuRef} className="relative sm:hidden">
             <button
-              onClick={() => setShowAccountMenu(!showAccountMenu)}
+              onClick={() =>
+                setShowAccountMenu(
+                  (currentShowAccountMenu) => !currentShowAccountMenu,
+                )
+              }
               className="cursor-pointer"
               aria-label="Open account menu"
               aria-expanded={showAccountMenu}
