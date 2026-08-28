@@ -20,9 +20,10 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
           })}
         </span>
       </div>
-
-      <span>votes:{article.votes}</span>
-      <span>comments: {article.comment_count}</span>
+      <div className="flex items-center justify-between text-sm text-neutral-500">
+        <span>👍🏻 {article.votes} votes</span>
+        <span>💬 {article.comment_count} comments</span>
+      </div>
     </li>
   );
 };
