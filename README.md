@@ -27,6 +27,7 @@ The current MVP allows users to:
 - Next.js App Router
 - Fetch API - React Context for current-user state
 - ESLint
+- Tailwind CSS
 
 ## Backend
 
