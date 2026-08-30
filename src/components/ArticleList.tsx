@@ -13,14 +13,7 @@ const ArticleList = ({ articles }: ArticleListProps) => {
       <Search />
       <ul className="flex flex-col gap-4">
         {articles.map((article) => {
-          return (
-            <Link
-              key={article.article_id}
-              href={`/articles/${article.article_id}`}
-            >
-              <ArticleCard article={article} />
-            </Link>
-          );
+          return <ArticleCard key={article.article_id} article={article} />;
         })}
       </ul>
     </div>
