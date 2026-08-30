@@ -8,7 +8,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
       <Link href={`/articles/${article.article_id}`}>
         <div className="flex flex-col gap-3">
           <h3 className="text-xl font-bold text-orange-900">{article.title}</h3>
-          <span className="rounded-lg border-2 border-orange-200 bg-orange-50 px-2 py-1 text-sm text-orange-500">
+          <span className="self-start rounded-lg border-2 border-orange-200 bg-orange-50 px-2 py-1 text-sm text-orange-500">
             {article.topic.toUpperCase()}
           </span>
           <div className="text-sm text-neutral-500">
