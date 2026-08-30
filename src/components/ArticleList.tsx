@@ -8,10 +8,10 @@ type ArticleListProps = {
 };
 const ArticleList = ({ articles }: ArticleListProps) => {
   return (
-    <>
+    <div className="mx-auto w-full max-w-4xl px-4 py-6">
       <h2>Articles</h2>
       <Search />
-      <ul>
+      <ul className="flex flex-col gap-4">
         {articles.map((article) => {
           return (
             <Link
@@ -23,7 +23,7 @@ const ArticleList = ({ articles }: ArticleListProps) => {
           );
         })}
       </ul>
-    </>
+    </div>
   );
 };
 

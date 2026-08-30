@@ -13,7 +13,6 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
           <span>👤 {article.author}</span>
           <span> · </span>
           <span>
-            created at:
             {new Date(article.created_at).toLocaleDateString("en-GB", {
               day: "numeric",
               month: "short",
