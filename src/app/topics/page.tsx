@@ -5,28 +5,39 @@ const Topics = async () => {
   const topics = await getTopics();
 
   return (
-    <>
-      <h2>Topics</h2>
-      <ul>
+    <div className="mx-auto w-full max-w-4xl px-4 py-6">
+      <h2 className="text-2xl font-bold text-orange-400">Topics</h2>
+      <ul className="grid gap-4 sm:grid-cols-2">
         {topics.map((topic) => {
           return (
-            <Link key={topic.slug} href={`/topics/${topic.slug}/articles`}>
-              <li>
-                <h3>{topic.slug}</h3>
-                <p>{topic.description}</p>
+            <li key={topic.slug}>
+              <Link
+                href={`/topics/${topic.slug}/articles`}
+                className="block overflow-hidden rounded-lg border border-orange-100 bg-white shadow-sm"
+              >
                 <img
                   src={
                     topic.img_url
                       ? topic.img_url
                       : "https://placehold.co/700x500"
                   }
+                  alt={`${topic.slug}`}
+                  className="h-64 w-full object-cover"
                 />
-              </li>
-            </Link>
+                <div className="flex flex-col gap-1 p-4">
+                  <h3 className="text-xl font-bold text-orange-900">
+                    {topic.slug.toUpperCase()}
+                  </h3>
+                  <p className="text-base text-neutral-500">
+                    {topic.description}
+                  </p>
+                </div>
+              </Link>
+            </li>
           );
         })}
       </ul>
-    </>
+    </div>
   );
 };
 
