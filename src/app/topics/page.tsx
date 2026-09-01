@@ -13,7 +13,7 @@ const Topics = async () => {
             <li key={topic.slug}>
               <Link
                 href={`/topics/${topic.slug}/articles`}
-                className="block overflow-hidden rounded-lg border border-orange-100 bg-white shadow-sm"
+                className="block overflow-hidden rounded-lg border border-orange-100 bg-white shadow-sm transition duration-200 hover:shadow-md hover:-translate-y-0.5"
               >
                 <img
                   src={

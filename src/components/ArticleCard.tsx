@@ -4,8 +4,11 @@ import Link from "next/link";
 type ArticleCardProps = { article: Article };
 const ArticleCard = ({ article }: ArticleCardProps) => {
   return (
-    <li className="block rounded-lg border border-orange-100 bg-white p-5 shadow-sm">
-      <Link href={`/articles/${article.article_id}`}>
+    <li>
+      <Link
+        href={`/articles/${article.article_id}`}
+        className="block rounded-lg border border-orange-100 bg-white p-5 shadow-sm transition duration-200 hover:shadow-md hover:-translate-y-0.5"
+      >
         <div className="flex flex-col gap-3">
           <h3 className="text-xl font-bold text-orange-900">{article.title}</h3>
           <span className="self-start rounded-lg border-2 border-orange-200 bg-orange-50 px-2 py-1 text-sm text-orange-500">
