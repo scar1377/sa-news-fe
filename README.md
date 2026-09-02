@@ -97,7 +97,7 @@ Shared UI is extracted into reusable components, including the article list used
 
 ## Current Status
 
-The core frontend MVP functionality is complete. The next stage of the project is focused on visual styling, responsive design and general UI/UX polish.
+The core frontend MVP functionality is complete. The project is currently in the visual styling and UI/UX polish stage, using Tailwind CSS with a responsive, mobile-first approach.
 
 ## Future Improvements
 
