@@ -28,18 +28,25 @@ const SingleArticle = async ({
           topic: {article.topic.toUpperCase()}
         </span>
         <div className="text-sm text-neutral-500">
-          <span>author: {article.author}</span>
+          <span>👤 {article.author}</span>
+          <span> · </span>
+          <span>
+            {new Date(article.created_at).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })}
+          </span>
           <img src={article.article_img_url} />
           <span>{article.body}</span>
-          <span>created at {article.created_at}</span>
         </div>
-      </div>
-      <Votes article_id={article_id} initialVotes={article.votes} />
+        <Votes article_id={article_id} initialVotes={article.votes} />
 
-      <CommentSection
-        article_id={article_id}
-        initialCommentCount={article.comment_count}
-      />
+        <CommentSection
+          article_id={article_id}
+          initialCommentCount={article.comment_count}
+        />
+      </div>
     </div>
   );
 };
