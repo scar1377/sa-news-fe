@@ -22,12 +22,18 @@ const SingleArticle = async ({
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-6">
-      <h2>{article.title}</h2>
-      <p>topic: {article.topic}</p>
-      <p>author: {article.author}</p>
-      <img src={article.article_img_url} />
-      <p>{article.body}</p>
-      <p>created at {article.created_at}</p>
+      <div className="flex flex-col gap-3">
+        <h2 className="text-3xl font-bold text-orange-900">{article.title}</h2>
+        <span className="self-start rounded-lg border-2 border-orange-200 bg-orange-50 px-2 py-1 text-sm text-orange-500">
+          topic: {article.topic.toUpperCase()}
+        </span>
+        <div className="text-sm text-neutral-500">
+          <span>author: {article.author}</span>
+          <img src={article.article_img_url} />
+          <span>{article.body}</span>
+          <span>created at {article.created_at}</span>
+        </div>
+      </div>
       <Votes article_id={article_id} initialVotes={article.votes} />
 
       <CommentSection
