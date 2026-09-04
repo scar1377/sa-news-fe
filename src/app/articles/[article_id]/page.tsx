@@ -21,7 +21,7 @@ const SingleArticle = async ({
   const { article } = result;
 
   return (
-    <>
+    <div className="mx-auto w-full max-w-4xl px-4 py-6">
       <h2>{article.title}</h2>
       <p>topic: {article.topic}</p>
       <p>author: {article.author}</p>
@@ -34,7 +34,7 @@ const SingleArticle = async ({
         article_id={article_id}
         initialCommentCount={article.comment_count}
       />
-    </>
+    </div>
   );
 };
 
