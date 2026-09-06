@@ -25,7 +25,7 @@ const SingleArticle = async ({
       <div className="flex flex-col gap-3">
         <h2 className="text-3xl font-bold text-orange-900">{article.title}</h2>
         <span className="self-start rounded-lg border-2 border-orange-200 bg-orange-50 px-2 py-1 text-sm text-orange-500">
-          topic: {article.topic.toUpperCase()}
+          {article.topic.toUpperCase()}
         </span>
         <div className="text-sm text-neutral-500">
           <span>👤 {article.author}</span>
@@ -37,16 +37,20 @@ const SingleArticle = async ({
               year: "numeric",
             })}
           </span>
-          <img src={article.article_img_url} />
-          <span>{article.body}</span>
         </div>
-        <Votes article_id={article_id} initialVotes={article.votes} />
-
-        <CommentSection
-          article_id={article_id}
-          initialCommentCount={article.comment_count}
+        <img
+          src={article.article_img_url}
+          alt={`${article.title}`}
+          className="w-full rounded-lg object-cover"
         />
+        <p className="text-base leading-7 text-neutral-700">{article.body}</p>
       </div>
+      <Votes article_id={article_id} initialVotes={article.votes} />
+
+      <CommentSection
+        article_id={article_id}
+        initialCommentCount={article.comment_count}
+      />
     </div>
   );
 };
