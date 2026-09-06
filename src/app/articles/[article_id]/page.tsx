@@ -21,7 +21,7 @@ const SingleArticle = async ({
   const { article } = result;
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-4 py-6">
+    <div className="mx-auto w-full max-w-3xl px-4 py-6">
       <div className="flex flex-col gap-3">
         <h2 className="text-3xl font-bold text-orange-900">{article.title}</h2>
         <span className="self-start rounded-lg border-2 border-orange-200 bg-orange-50 px-2 py-1 text-sm text-orange-500">
@@ -41,7 +41,7 @@ const SingleArticle = async ({
         <img
           src={article.article_img_url}
           alt={`${article.title}`}
-          className="w-full rounded-lg object-cover"
+          className="w-full rounded-lg object-cover sm:h-80"
         />
         <p className="text-base leading-7 text-neutral-700">{article.body}</p>
       </div>
