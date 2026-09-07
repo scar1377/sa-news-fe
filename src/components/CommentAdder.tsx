@@ -48,7 +48,7 @@ const CommentAdder = ({ article_id, onPostSuccess }: CommentAdderProps) => {
               htmlFor="new-comment"
               className="text-sm font-medium text-neutral-700"
             >
-              Add Comment:
+              Add a Comment
             </label>
             <textarea
               placeholder="Add your comment here..."
