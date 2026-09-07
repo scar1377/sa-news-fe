@@ -18,16 +18,21 @@ const DeleteButton = ({ comment_id, onDeleteSuccess }: DeleteButtonProps) => {
     setIsDeleting(false);
     if (!res.ok) {
       setError("Oops, something went wrong. Try again later");
+      return;
     }
     onDeleteSuccess(comment_id);
   };
   return (
-    <>
-      <button onClick={handleClick} disabled={isDeleting}>
+    <div className="flex flex-col gap-2">
+      <button
+        onClick={handleClick}
+        disabled={isDeleting}
+        className="self-start rounded-md border-2 border-red-200 bg-white px-3 py-1.5 text-sm text-red-600 transition duration-200 hover:border-red-300 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-40"
+      >
         {isDeleting ? "Deleting..." : "Delete"}
       </button>
-      {error && <p>{error}</p>}
-    </>
+      {error && <p className="text-sm text-red-600">{error}</p>}
+    </div>
   );
 };
 
