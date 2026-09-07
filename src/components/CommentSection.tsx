@@ -45,21 +45,32 @@ const CommentSection = ({
     });
   };
   return (
-    <>
-      <p>Comments({commentCount})</p>
+    <section className="flex flex-col gap-4">
+      <h3 className="text-xl font-bold text-orange-900">
+        Comments ({commentCount})
+      </h3>
       <CommentAdder article_id={article_id} onPostSuccess={onPostSuccess} />
-      {isLoading && <p>Loading comments...</p>}
-      {error && <p>{error}</p>}
+      {isLoading && (
+        <p className="text-sm text-neutral-500">Loading comments...</p>
+      )}
+      {error && <p className="text-sm text-red-600">{error}</p>}
       {showComments ? (
         <>
-          <button onClick={handleClickHide}>Hide Comments</button>
+          <button
+            onClick={handleClickHide}
+            className="self-start rounded-md border-2 border-orange-200 bg-white px-3 py-1.5 text-sm text-orange-500 transition duration-200 hover:border-orange-300 hover:bg-orange-50"
+          >
+            Hide Comments
+          </button>
           {comments.length === 0 && (
-            <>
-              <p>No comments yet</p>
-              <button>add comment</button>
-            </>
+            <div className="flex flex-col gap-2">
+              <p className="text-sm text-neutral-500">No comments yet</p>
+              <button className="self-start text-sm font-medium text-orange-500 hover:text-orange-700">
+                add comment
+              </button>
+            </div>
           )}
-          <ul>
+          <ul className="flex flex-col gap-3">
             {comments.map((comment) => (
               <CommentCard
                 key={comment.comment_id}
@@ -70,9 +81,14 @@ const CommentSection = ({
           </ul>
         </>
       ) : (
-        <button onClick={handleClickShow}>Show Comments</button>
+        <button
+          onClick={handleClickShow}
+          className="self-start rounded-md border-2 border-orange-200 bg-white px-3 py-1.5 text-sm text-orange-500 transition duration-200 hover:border-orange-300 hover:bg-orange-50"
+        >
+          Show Comments
+        </button>
       )}
-    </>
+    </section>
   );
 };
 
