@@ -55,19 +55,31 @@ const Votes = ({ article_id, initialVotes }: VotesProps) => {
     }
   };
   return (
-    <>
-      {!user && <p>Please login to vote</p>}
-      <button onClick={handleUpVote} disabled={hasUpVoted || isVoting || !user}>
-        +
-      </button>
-      <span> {initialVotes + newVote} </span>
-      <button
-        onClick={handleDownVote}
-        disabled={hasDownVoted || isVoting || !user}
-      >
-        -
-      </button>
-    </>
+    <div className="flex flex-col gap-2">
+      {!user && (
+        <p className="text-sm text-neutral-500">Please login to vote</p>
+      )}
+      <div className="flex items-center gap-3">
+        <button
+          onClick={handleUpVote}
+          disabled={hasUpVoted || isVoting || !user}
+          className="rounded-md border-2 border-orange-200 bg-white px-3 py-1 text-orange-500 transition duration-200 hover:border-orange-300 hover:bg-orange-50 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          +
+        </button>
+        <span className="min-w-8 text-center font-medium text-neutral-700">
+          {" "}
+          {initialVotes + newVote}{" "}
+        </span>
+        <button
+          onClick={handleDownVote}
+          disabled={hasDownVoted || isVoting || !user}
+          className="rounded-md border-2 border-orange-200 bg-white px-3 py-1 text-orange-500 transition duration-200 hover:border-orange-300 hover:bg-orange-50 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          -
+        </button>
+      </div>
+    </div>
   );
 };
 
