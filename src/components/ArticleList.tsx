@@ -1,6 +1,5 @@
 import type { Article } from "@/types/api";
 import Search from "./Search";
-import Link from "next/link";
 import ArticleCard from "./ArticleCard";
 
 type ArticleListProps = {
