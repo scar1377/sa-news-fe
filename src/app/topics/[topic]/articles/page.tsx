@@ -22,7 +22,12 @@ const ArticlesByTopic = async ({
   }
 
   const { articles } = result;
-  return <ArticleList articles={articles} />;
+  return (
+    <ArticleList
+      articles={articles}
+      title={`${topic.charAt(0).toUpperCase() + topic.slice(1)} Articles`}
+    />
+  );
 };
 
 export default ArticlesByTopic;
