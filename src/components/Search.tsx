@@ -32,9 +32,9 @@ const Search = () => {
           value={sortBy}
           className="bg-white border-2 border-orange-200 text-orange-500 rounded-md px-2 py-1.5 sm:px-3 sm:py-2 hover:border-orange-400 cursor-pointer transition duration-200 text-sm outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100"
         >
-          <option value="created_at">date</option>
-          <option value="votes">votes</option>
-          <option value="comment_count">comments</option>
+          <option value="created_at">Date</option>
+          <option value="votes">Votes</option>
+          <option value="comment_count">Comments</option>
         </select>
       </div>
 
