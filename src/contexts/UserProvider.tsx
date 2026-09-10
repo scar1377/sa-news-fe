@@ -1,7 +1,7 @@
 "use client";
 
 import type { User } from "@/types/api";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import UserContext from "./UserContext";
 
 type UserProviderProps = {
@@ -10,6 +10,22 @@ type UserProviderProps = {
 
 const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

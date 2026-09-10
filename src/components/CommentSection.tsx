@@ -60,15 +60,10 @@ const CommentSection = ({
             onClick={handleClickHide}
             className="self-start rounded-md border-2 border-orange-200 bg-white px-3 py-1.5 text-sm text-orange-500 transition duration-200 hover:border-orange-300 hover:bg-orange-50"
           >
-            Hide Comments
+            Hide comments
           </button>
           {comments.length === 0 && (
-            <div className="flex flex-col gap-2">
-              <p className="text-sm text-neutral-500">No comments yet</p>
-              <button className="self-start text-sm font-medium text-orange-500 hover:text-orange-700">
-                add comment
-              </button>
-            </div>
+            <p className="text-sm text-neutral-500">No comments yet</p>
           )}
           <ul className="flex flex-col gap-3">
             {comments.map((comment) => (
@@ -85,7 +80,7 @@ const CommentSection = ({
           onClick={handleClickShow}
           className="self-start rounded-md border-2 border-orange-200 bg-white px-3 py-1.5 text-sm text-orange-500 transition duration-200 hover:border-orange-300 hover:bg-orange-50"
         >
-          Show Comments
+          Show comments
         </button>
       )}
     </section>
