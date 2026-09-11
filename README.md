@@ -18,6 +18,7 @@ The current MVP allows users to:
 - See optimistic vote updates while requests are being processed
 - See article comment counts update after posting or deleting a comment
 - Receive loading and error feedback for asynchronous actions and routes
+- Persist the selected user across page refreshes
 
 ## Tech Stack
 
@@ -98,16 +99,16 @@ Shared UI is extracted into reusable components, including the article list used
 
 ## Current Status
 
-The core frontend MVP functionality is complete. The project is currently in the visual styling and UI/UX polish stage, using Tailwind CSS with a responsive, mobile-first approach.
+The core frontend MVP is complete, including responsive styling and UI/UX polish. The application supports article and topic browsing, sorting, user selection, voting, commenting and responsive layouts across mobile and desktop.
 
 ## Future Improvements
 
 Planned improvements include:
 
-- Full visual styling and responsive layouts
-- Accessibility and UX improvements
-- Further refinement of loading, empty and error states
-- Additional polish to the login/user-selection experience
+- Further accessibility improvements
+- Additional refinement of loading, empty and error states
+- Automated frontend testing
+- Further performance and UX improvements
 
 ## Related Repository
 
