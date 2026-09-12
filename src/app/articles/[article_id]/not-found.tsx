@@ -9,7 +9,7 @@ const NotFound = () => {
         </h2>
 
         <p className="text-base text-neutral-600">
-          The article you're looking for doesn't exist.
+          The article you&apos;re looking for doesn&apos;t exist.
         </p>
 
         <Link

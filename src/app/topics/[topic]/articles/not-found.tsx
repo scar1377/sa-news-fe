@@ -4,12 +4,10 @@ const NotFound = () => {
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-10">
       <div className="flex flex-col gap-4">
-        <h2 className="text-3xl font-bold text-orange-900">
-          Topic not found
-        </h2>
+        <h2 className="text-3xl font-bold text-orange-900">Topic not found</h2>
 
         <p className="text-base text-neutral-600">
-          The topic you're looking for doesn't exist.
+          The topic you&apos;re looking for doesn&apos;t exist.
         </p>
 
         <Link

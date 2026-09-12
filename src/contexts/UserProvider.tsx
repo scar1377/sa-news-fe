@@ -9,26 +9,21 @@ type UserProviderProps = {
 };
 
 const UserProvider = ({ children }: UserProviderProps) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [hasLoadedUser, setHasLoadedUser] = useState(false);
+  const [user, setUser] = useState<User | null>(() => {
+    if (typeof window === "undefined") return null;
 
-  useEffect(() => {
     const savedUser = localStorage.getItem("user");
 
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-    setHasLoadedUser(true);
-  }, []);
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
   useEffect(() => {
-    if (!hasLoadedUser) return;
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
     } else {
       localStorage.removeItem("user");
     }
-  }, [user, hasLoadedUser]);
+  }, [user]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
