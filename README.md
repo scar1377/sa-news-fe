@@ -2,6 +2,12 @@
 
 SA News is a full-stack news application built as a personal project to practise developing a modern frontend against a REST API. This repository contains the frontend application. It is built with Next.js, React and TypeScript and consumes the separate SA News backend API.
 
+## Live Demo
+
+The deployed application is available here:
+
+https://sa-news-fe.vercel.app/
+
 ## Features
 
 The current MVP allows users to:
@@ -99,7 +105,9 @@ Shared UI is extracted into reusable components, including the article list used
 
 ## Current Status
 
-The core frontend MVP is complete, including responsive styling and UI/UX polish. The application supports article and topic browsing, sorting, user selection, voting, commenting and responsive layouts across mobile and desktop.
+The core frontend MVP is complete and deployed, including responsive styling and UI/UX polish. The application supports article and topic browsing, sorting, user selection, voting, commenting and responsive layouts across mobile and desktop.
+
+Frontend testing is the final planned stage before the project is considered complete.
 
 ## Future Improvements
 
