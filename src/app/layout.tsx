@@ -16,7 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "SA News",
-  description: "A news application for reading and discussing articles",
+  description: "description:
+  "A community news application for browsing articles, exploring topics, voting and joining discussions",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
